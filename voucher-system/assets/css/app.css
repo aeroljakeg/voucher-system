@@ -36,6 +36,22 @@ button, input, select, textarea { font: inherit; }
 button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, a:focus-visible { outline: 2px solid var(--app-accent); outline-offset: 2px; }
 
 .app-shell { display: flex; min-height: 100vh; }
+.app-shell.sidebar-collapsed .app-sidebar {
+    flex-basis: 86px;
+    width: 86px;
+    padding-inline: 8px;
+}
+.app-shell.sidebar-collapsed .app-sidebar-brand,
+.app-shell.sidebar-collapsed .app-sidebar-section h2,
+.app-shell.sidebar-collapsed .app-sidebar-user {
+    display: none;
+}
+.app-shell.sidebar-collapsed .app-sidebar-link {
+    overflow: hidden;
+    white-space: nowrap;
+    padding-inline: 0;
+    text-indent: -9999px;
+}
 .app-sidebar {
     position: sticky;
     top: 0;
@@ -47,6 +63,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
     padding: 18px 14px 14px;
     border-right: 1px solid var(--app-border);
     background: var(--app-surface);
+    transition: flex-basis .2s ease, width .2s ease, padding .2s ease;
 }
 .app-sidebar-brand { display: block; padding: 5px 10px 20px; color: var(--app-text); font-size: 1.05rem; font-weight: 800; }
 .app-sidebar-nav { flex: 1; overflow-y: auto; }
@@ -59,9 +76,11 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .app-sidebar-user span { color: var(--app-muted); font-size: .84rem; }
 .app-main { flex: 1; min-width: 0; }
 .app-topbar { display: flex; min-height: 64px; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 28px; border-bottom: 1px solid var(--app-border); background: var(--app-surface); }
+.app-topbar-leading { display: flex; align-items: center; gap: 10px; }
 .app-topbar h1 { margin: 0; font-size: 1.05rem; }
 .app-topbar-actions { display: flex; align-items: center; gap: 9px; }
 .app-topbar-actions form { margin: 0; }
+.app-sidebar-toggle { min-width: 38px; padding: 8px 10px; }
 .app-button { display: inline-flex; min-height: 38px; align-items: center; justify-content: center; padding: 8px 12px; border: 1px solid var(--app-border); border-radius: 9px; background: var(--app-surface); color: var(--app-text); font-weight: 650; cursor: pointer; }
 .app-button:hover { background: var(--app-surface-muted); }
 .app-content { width: min(1240px, calc(100% - 48px)); margin: 26px auto 48px; }

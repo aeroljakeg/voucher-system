@@ -7,7 +7,10 @@ $pageTitle = isset($pageTitle) && is_string($pageTitle) ? $pageTitle : 'Voucher 
 ?>
 <div class="app-main">
     <header class="app-topbar">
-        <h1><?= e($pageTitle) ?></h1>
+        <div class="app-topbar-leading">
+            <button class="app-button app-sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="true" aria-label="Collapse sidebar">☰</button>
+            <h1><?= e($pageTitle) ?></h1>
+        </div>
         <div class="app-topbar-actions">
             <button class="app-button" type="button" data-theme-toggle aria-label="Switch to dark mode">Dark mode</button>
             <form action="<?= e(app_url('auth/logout.php')) ?>" method="post">

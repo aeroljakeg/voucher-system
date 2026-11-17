@@ -1,15 +1,21 @@
 (function () {
     const root = document.documentElement;
+    const shell = document.querySelector('.app-shell');
     const toggle = document.querySelector('[data-theme-toggle]');
-    const storageKey = root.dataset.themeKey || 'voucher-system-theme';
+    const sidebarToggle = document.querySelector('[data-sidebar-toggle]');
+    const themeStorageKey = root.dataset.themeKey || 'voucher-system-theme';
+    const sidebarStorageKey = 'voucher-system-sidebar-collapsed';
     const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     let savedTheme = null;
+    let sidebarCollapsed = false;
 
     try {
-        savedTheme = window.localStorage.getItem(storageKey);
+        savedTheme = window.localStorage.getItem(themeStorageKey);
+        sidebarCollapsed = window.localStorage.getItem(sidebarStorageKey) === '1';
     } catch (error) {
-        console.warn('Could not read the saved theme preference.', error);
+        console.warn('Could not read saved preferences.', error);
         savedTheme = null;
+        sidebarCollapsed = false;
     }
 
     function setTheme(theme) {
@@ -22,17 +28,43 @@
         }
     }
 
+    function setSidebarState(collapsed) {
+        if (!shell) {
+            return;
+        }
+
+        shell.classList.toggle('sidebar-collapsed', collapsed);
+        if (sidebarToggle) {
+            sidebarToggle.setAttribute('aria-expanded', String(!collapsed));
+            sidebarToggle.setAttribute('aria-label', collapsed ? 'Expand sidebar' : 'Collapse sidebar');
+            sidebarToggle.textContent = collapsed ? '☰' : '✕';
+        }
+
+        try {
+            window.localStorage.setItem(sidebarStorageKey, collapsed ? '1' : '0');
+        } catch (error) {
+            console.warn('Could not save the sidebar preference.', error);
+        }
+    }
+
     setTheme(savedTheme === 'dark' || savedTheme === 'light' ? savedTheme : preferredTheme);
+    setSidebarState(sidebarCollapsed);
 
     if (toggle) {
         toggle.addEventListener('click', function () {
             const theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
             try {
-                window.localStorage.setItem(storageKey, theme);
+                window.localStorage.setItem(themeStorageKey, theme);
             } catch (error) {
                 console.warn('Could not save the theme preference.', error);
             }
             setTheme(theme);
+        });
+    }
+
+    if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', function () {
+            setSidebarState(!shell.classList.contains('sidebar-collapsed'));
         });
     }
 

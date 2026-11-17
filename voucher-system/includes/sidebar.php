@@ -103,7 +103,8 @@ $sidebarSections = [
                         $isCurrent = $sidebarCurrentPath === $itemPath;
                         ?>
                         <a class="app-sidebar-link<?= $isCurrent ? ' is-active' : '' ?>"
-                           href="<?= e($itemUrl) ?>"<?= $isCurrent ? ' aria-current="page"' : '' ?>>
+                           href="<?= e($itemUrl) ?>"<?= $isCurrent ? ' aria-current="page"' : '' ?>
+                           title="<?= e($item['label']) ?>">
                             <?= e($item['label']) ?>
                         </a>
                     <?php endforeach; ?>
