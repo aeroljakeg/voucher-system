@@ -32,7 +32,7 @@ $latestStatement = $connection->query(
 $latestVouchers = $latestStatement->fetchAll();
 
 $pageTitle = 'Dashboard';
-$themeStorageKey = 'dashboard-theme';
+$themeStorageKey = 'voucher-system-theme';
 require __DIR__ . '/../includes/header.php';
 require __DIR__ . '/../includes/sidebar.php';
 require __DIR__ . '/../includes/navbar.php';

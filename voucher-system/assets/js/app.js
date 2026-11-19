@@ -5,7 +5,6 @@
     const sidebarToggle = document.querySelector('[data-sidebar-toggle]');
     const themeStorageKey = root.dataset.themeKey || 'voucher-system-theme';
     const sidebarStorageKey = 'voucher-system-sidebar-collapsed';
-    const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     let savedTheme = null;
     let sidebarCollapsed = false;
 
@@ -47,7 +46,7 @@
         }
     }
 
-    setTheme(savedTheme === 'dark' || savedTheme === 'light' ? savedTheme : preferredTheme);
+    setTheme(savedTheme === 'dark' || savedTheme === 'light' ? savedTheme : 'light');
     setSidebarState(sidebarCollapsed);
 
     if (toggle) {

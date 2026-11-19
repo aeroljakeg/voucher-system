@@ -11,7 +11,7 @@ $companyName = isset($companyName) && is_string($companyName) && $companyName !=
 $shopBuyer = BuyerAccountService::current(db());
 ?>
 <!doctype html>
-<html lang="en" data-theme="light" data-theme-key="buyer-portal-theme">
+<html lang="en" data-theme="light" data-theme-key="voucher-system-theme">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">

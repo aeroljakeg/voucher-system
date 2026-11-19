@@ -330,7 +330,7 @@ $previousUrl = 'transactions.php?' . http_build_query($pageQuery + ['page' => ma
 $nextUrl = 'transactions.php?' . http_build_query($pageQuery + ['page' => min($pageCount, $page + 1)]);
 ?>
 <!doctype html>
-<html lang="en" data-theme="light" data-theme-key="bank-transactions-theme">
+<html lang="en" data-theme="light" data-theme-key="voucher-system-theme">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">

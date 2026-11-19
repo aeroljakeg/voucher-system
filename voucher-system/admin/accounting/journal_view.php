@@ -81,7 +81,7 @@ $isBalanced = $journal
     && abs((float) $journal['total_debit'] - (float) $journal['total_credit']) < 0.005;
 ?>
 <!doctype html>
-<html lang="en" data-theme="light" data-theme-key="journal-view-theme">
+<html lang="en" data-theme="light" data-theme-key="voucher-system-theme">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
