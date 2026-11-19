@@ -35,6 +35,11 @@ a:hover { text-decoration: underline; }
 button, input, select, textarea { font: inherit; }
 button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, a:focus-visible { outline: 2px solid var(--app-accent); outline-offset: 2px; }
 
+.password-field { position: relative; display: block; }
+.password-field input { padding-right: 66px; }
+.password-toggle { position: absolute; top: 50%; right: 8px; transform: translateY(-50%); min-height: 28px; padding: 3px 6px; border: 0; border-radius: 6px; background: transparent; color: var(--app-accent); font: 700 .78rem/1.2 system-ui, sans-serif; cursor: pointer; }
+.password-toggle:hover { background: var(--app-accent-soft); }
+
 .app-shell { display: flex; min-height: 100vh; }
 .app-shell.sidebar-collapsed .app-sidebar {
     flex-basis: 86px;

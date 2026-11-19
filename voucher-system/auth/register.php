@@ -112,6 +112,10 @@ function h(string $value): string
         .error { background: var(--danger-bg); color: var(--danger); }
         .success { background: var(--success-bg); color: var(--success); }
         .footer { margin: 20px 0 0; text-align: center; }
+        .password-field { position: relative; display: block; }
+        .password-field input { padding-right: 66px; }
+        .password-toggle { position: absolute; top: 50%; right: 8px; transform: translateY(-50%); min-height: 28px; padding: 3px 6px; border: 0; border-radius: 6px; background: transparent; color: var(--accent); font: 700 .78rem/1.2 system-ui, sans-serif; cursor: pointer; }
+        .password-toggle:hover { background: color-mix(in srgb, var(--accent) 12%, transparent); }
     </style>
 </head>
 <body>
@@ -142,5 +146,6 @@ function h(string $value): string
         <p class="footer">Already have an account? <a href="<?= h(app_url('auth/login.php')) ?>">Sign in</a></p>
     <?php endif; ?>
 </main>
+<script src="<?= h(app_url('assets/js/app.js')) ?>" defer></script>
 </body>
 </html>

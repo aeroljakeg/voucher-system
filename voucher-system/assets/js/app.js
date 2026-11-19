@@ -76,6 +76,37 @@
         });
     });
 
+    document.querySelectorAll('input[type="password"]').forEach(function (input) {
+        if (input.dataset.passwordToggleAdded === 'true') {
+            return;
+        }
+
+        input.dataset.passwordToggleAdded = 'true';
+
+        const wrapper = document.createElement('span');
+        wrapper.className = 'password-field';
+        input.parentNode.insertBefore(wrapper, input);
+        wrapper.appendChild(input);
+
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'password-toggle';
+        button.textContent = 'Show';
+        button.setAttribute('aria-label', 'Show password');
+        button.setAttribute('aria-controls', input.id || '');
+        button.setAttribute('aria-pressed', 'false');
+
+        button.addEventListener('click', function () {
+            const showing = input.type === 'text';
+            input.type = showing ? 'password' : 'text';
+            button.textContent = showing ? 'Show' : 'Hide';
+            button.setAttribute('aria-label', showing ? 'Show password' : 'Hide password');
+            button.setAttribute('aria-pressed', String(!showing));
+        });
+
+        wrapper.appendChild(button);
+    });
+
     document.querySelectorAll('[data-add-voucher-line]').forEach(function (button) {
         button.addEventListener('click', function () {
             const body = document.querySelector('[data-voucher-lines]');

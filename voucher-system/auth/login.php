@@ -80,6 +80,10 @@ function h(string $value): string
         input { width: 100%; padding: 11px 12px; border: 1px solid var(--border); border-radius: 9px; background: var(--bg); color: var(--text); font: inherit; }
         button { width: 100%; margin-top: 22px; padding: 12px; border: 0; border-radius: 9px; background: var(--accent); color: #fff; font: inherit; font-weight: 700; cursor: pointer; }
         .error { margin: 0 0 16px; padding: 11px 12px; border-radius: 9px; background: var(--danger-bg); color: var(--danger); }
+        .password-field { position: relative; display: block; }
+        .password-field input { padding-right: 66px; }
+        .password-toggle { position: absolute; top: 50%; right: 8px; transform: translateY(-50%); min-height: 28px; padding: 3px 6px; border: 0; border-radius: 6px; background: transparent; color: var(--accent); font: 700 .78rem/1.2 system-ui, sans-serif; cursor: pointer; }
+        .password-toggle:hover { background: color-mix(in srgb, var(--accent) 12%, transparent); }
     </style>
 </head>
 <body>
@@ -101,5 +105,6 @@ function h(string $value): string
     <p style="margin: 12px 0 0; text-align: center;">Administrators sign in here too.</p>
     <p style="margin: 12px 0 0; text-align: center;"><a href="<?= h(app_url('shop/index.php')) ?>">Browse vouchers for sale</a></p>
 </main>
+<script src="<?= h(app_url('assets/js/app.js')) ?>" defer></script>
 </body>
 </html>
