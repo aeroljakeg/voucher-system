@@ -1,5 +1,3 @@
-CREATE DATABASE IF NOT EXISTS voucher_system_app CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE voucher_system_app;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ========== USERS & PERMISSIONS ==========

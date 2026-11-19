@@ -1,0 +1,7 @@
+.env
+.env.*
+!.env.example
+**/*.log
+voucher-system/config/app-config.php
+voucher-system/uploads/*
+!voucher-system/uploads/.htaccess

@@ -1,0 +1,11 @@
+DirectoryIndex index.php
+
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+<Files "app-config.php">
+    Require all denied
+</Files>
+
+Options -Indexes

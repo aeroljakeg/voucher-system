@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../config/functions.php';
+require_once __DIR__ . '/../config/environment.php';
 require_once __DIR__ . '/BuyerOrderService.php';
 
 final class StripeCheckoutService
@@ -116,9 +117,9 @@ final class StripeCheckoutService
             throw new RuntimeException('PHP cURL is required for Stripe Checkout.');
         }
 
-        $secretKey = getenv('STRIPE_SECRET_KEY');
+        $secretKey = app_config_value('STRIPE_SECRET_KEY');
         if (!is_string($secretKey) || !preg_match('/^sk_(test|live)_[A-Za-z0-9]+$/D', $secretKey)) {
-            throw new RuntimeException('Stripe is not configured. Set STRIPE_SECRET_KEY in the server environment.');
+            throw new RuntimeException('Stripe is not configured. Set STRIPE_SECRET_KEY in the server environment or config/app-config.php.');
         }
 
         $headers = ['Authorization: Bearer ' . $secretKey];
@@ -172,9 +173,9 @@ final class StripeCheckoutService
 
     private static function webhookSecret(): string
     {
-        $secret = getenv('STRIPE_WEBHOOK_SECRET');
+        $secret = app_config_value('STRIPE_WEBHOOK_SECRET');
         if (!is_string($secret) || !preg_match('/^whsec_[A-Za-z0-9_=-]+$/D', $secret)) {
-            throw new RuntimeException('Stripe webhooks are not configured. Set STRIPE_WEBHOOK_SECRET in the server environment.');
+            throw new RuntimeException('Stripe webhooks are not configured. Set STRIPE_WEBHOOK_SECRET in the server environment or config/app-config.php.');
         }
 
         return $secret;

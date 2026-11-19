@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/environment.php';
+
 function db(): PDO
 {
     static $connection = null;
@@ -8,18 +10,20 @@ function db(): PDO
         return $connection;
     }
 
-    $host = getenv('DB_HOST') ?: '127.0.0.1';
-    $database = getenv('DB_NAME') ?: 'voucher_system_app';
-    $portValue = getenv('DB_PORT');
-    $port = $portValue === false || $portValue === ''
+    $host = (string) app_config_value('DB_HOST', '127.0.0.1');
+    $database = (string) app_config_value('DB_NAME', 'voucher_system_app');
+    $portValue = app_config_value('DB_PORT');
+    $port = $portValue === false || $portValue === null || $portValue === ''
         ? 3306
         : filter_var($portValue, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1, 'max_range' => 65535]]);
     if ($port === false) {
         throw new RuntimeException('DB_PORT must be a valid TCP port number.');
     }
 
-    $username = getenv('DB_USER');
-    $password = getenv('DB_PASS');
+    $usernameValue = app_config_value('DB_USER');
+    $passwordValue = app_config_value('DB_PASS');
+    $username = is_string($usernameValue) ? $usernameValue : '';
+    $password = is_string($passwordValue) ? $passwordValue : '';
 
     if ($username === false || $username === '') {
         if ($host === '127.0.0.1' || $host === 'localhost') {
@@ -35,8 +39,8 @@ function db(): PDO
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         PDO::ATTR_EMULATE_PREPARES => false,
     ];
-    $sslCaPath = getenv('DB_SSL_CA');
-    if ($sslCaPath !== false && $sslCaPath !== '') {
+    $sslCaPath = app_config_value('DB_SSL_CA');
+    if (is_string($sslCaPath) && $sslCaPath !== '') {
         if (!is_file($sslCaPath) || !is_readable($sslCaPath)) {
             throw new RuntimeException('DB_SSL_CA must point to a readable CA certificate file.');
         }

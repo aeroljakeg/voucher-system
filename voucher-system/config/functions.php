@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/database.php';
+require_once __DIR__ . '/environment.php';
 
 function app_base_path(): string
 {
@@ -40,9 +41,14 @@ function app_url(string $path = ''): string
 
 function app_absolute_url(string $path = ''): string
 {
-    $baseUrl = getenv('APP_BASE_URL');
-    if ($baseUrl === false || trim($baseUrl) === '') {
-        $baseUrl = 'http://localhost' . app_base_path();
+    $baseUrl = app_config_value('APP_BASE_URL');
+    if (!is_string($baseUrl) || trim($baseUrl) === '') {
+        $https = !empty($_SERVER['HTTPS']) && strtolower((string) $_SERVER['HTTPS']) !== 'off';
+        $scheme = $https ? 'https' : 'http';
+        $host = $_SERVER['HTTP_HOST'] ?? ($_SERVER['SERVER_NAME'] ?? 'localhost');
+        $host = is_string($host) ? trim($host) : 'localhost';
+        $host = preg_replace('/[^A-Za-z0-9.\-:\[\]]/', '', $host) ?: 'localhost';
+        $baseUrl = $scheme . '://' . $host . app_base_path();
     }
 
     $baseUrl = rtrim(trim($baseUrl), '/');

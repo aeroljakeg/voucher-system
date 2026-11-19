@@ -28,6 +28,20 @@ For an existing installation, import `database/buyer_portal.sql` and then `datab
 
 Open `http://localhost/voucher-system/voucher-system/shop/` to test the buyer flow. Card details are handled by Stripe Checkout and are not stored by this app.
 
+## InfinityFree shared hosting
+
+1. In InfinityFree, create a MySQL database and note its host, database name, username, and password.
+2. Upload the contents of this project folder into `htdocs` (or a subfolder under `htdocs`).
+3. Copy `config/app-config.example.php` to `config/app-config.php` and enter the InfinityFree database credentials, public HTTPS domain, and Stripe keys. Never upload real credentials to a public repository.
+4. In phpMyAdmin, select the newly created database and import `database/voucher_system.sql`.
+   - Do not use phpMyAdmin's “Create database” option.
+   - The SQL scripts assume that the database is already selected.
+   - For an existing buyer-enabled installation, import `database/buyer_account_migration.sql`.
+5. Change the default `admin` password immediately after the first login.
+6. Configure the Stripe webhook as `https://your-domain.example/shop/webhook.php` for `checkout.session.completed` and `checkout.session.expired`.
+
+InfinityFree may restrict outbound cURL, cron jobs, and PHP sessions. Confirm that cURL is enabled and that the account allows Stripe API requests before enabling live payments.
+
 For a public deployment, set `APP_BASE_URL` to the site's HTTPS URL, configure a Stripe webhook for `checkout.session.completed` and `checkout.session.expired`, and use the production keys only after testing.
 
 ## Vercel container test deployment

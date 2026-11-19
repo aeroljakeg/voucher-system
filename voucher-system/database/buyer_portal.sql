@@ -1,5 +1,3 @@
-USE voucher_system_app;
-
 CREATE TABLE IF NOT EXISTS buyer_orders (
   id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   public_token CHAR(64) NOT NULL UNIQUE,
